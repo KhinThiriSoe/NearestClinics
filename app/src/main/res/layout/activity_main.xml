@@ -1,0 +1,101 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.example.khinthirisoe.nearestclinicsprovider.MainActivity">
+
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/normal_green"
+        android:minHeight="?attr/actionBarSize" />
+
+    <TextView
+        android:id="@+id/search_toolbar_text"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/normal_green"
+        android:gravity="bottom|center"
+        android:padding="5dp"
+        android:text="@string/search_toolbar_text"
+        android:textColor="@android:color/white" />
+
+    <View
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="2.3dp"
+        android:background="@drawable/dropshadow" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/standard_margin">
+
+        <TextView
+            android:id="@+id/search_spinner_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:text="@string/search_spinner_text"
+            android:textColor="@color/normal_green" />
+
+        <Spinner
+            android:id="@+id/search_spinner"
+            android:layout_marginLeft="@dimen/standard_margin"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/search_north_south_street"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/search_linear"
+            android:text="@string/search_north_south_street"
+            android:textColor="@color/normal_green" />
+
+        <com.gc.materialdesign.views.Slider
+            android:id="@+id/slider_search_north_south_street"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/normal_green"
+            app:max="90"
+            app:min="54"
+            app:showNumberIndicator="true" />
+
+        <TextView
+            android:id="@+id/search_west_east_street"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/search_linear"
+            android:text="@string/search_west_east_street"
+            android:textColor="@color/normal_green" />
+
+        <com.gc.materialdesign.views.Slider
+            android:id="@+id/slider_search_west_east_street"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/normal_green"
+            app:max="50"
+            app:min="1"
+            app:showNumberIndicator="true" />
+
+        <com.gc.materialdesign.views.ButtonFloat
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/search_linear"
+            android:background="@color/normal_green"
+            app:animate="false"
+            android:onClick="btnSearch"
+            app:iconDrawable="@drawable/abc_ic_search_api_mtrl_alpha" />
+
+    </LinearLayout>
+</LinearLayout>

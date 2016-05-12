@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">NearestClinicsProvider</string>
+
+    <!--splashscreen-->
+    <string name="welcome">မဂၤလာပါ</string>
+    <string name="welcome_des">Nearest Clincis Application မွ ၾကိဳဆိုုပါတယ္</string>
+    <string name="developed_by">Developed by Khin Thiri Soe</string>
+
+    <!--about screen-->
+    <string name="developer_name">Khin Thiri Soe</string>
+    <string name="developer_degree">Studying M.C.Sc (Thesis) at University of Computer Studies, Mandalay. Proficient in Java, Android, HTML5, CSS3 &amp; more. Accept outsource from other companies as well.</string>
+
+    <!--search screen-->
+    <string name="search_toolbar_text">ေအာက္ပါအခ်က္အလက္မ်ားကိုု ျဖည့္စြက္ျပီး မိမိနွင့္အနီးဆံုုးရွိ ေဆးရံုု/ေဆးခန္းမ်ားကိုုုု ရွာနိုုင္သည္။</string>
+    <string name="search_spinner_text">မိမိရွာလိုုေသာ အထူးကုုအမ်ိဳးအစားကိုု ေရြးခ်ယ္ပါ</string>
+    <string name="search_north_south_street">မိမိနွင့္အနီးဆံုုး ေတာင္ေျမာက္လမ္းသြယ္ကိုု ေရြးခ်ယ္ပါ</string>
+    <string name="search_west_east_street">မိမိနွင့္အနီးဆံုုး ေရွ႕ေနာက္လမ္းသြယ္ကိုု ေရြးခ်ယ္ပါ</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="title_activity_phone_dialog">PhoneDialogActivity</string>
+    <string name="title_activity_result">ResultActivity</string>
+</resources>

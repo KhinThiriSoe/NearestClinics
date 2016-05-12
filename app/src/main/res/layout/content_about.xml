@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/standard_margin"
+    android:background="@android:color/white"
+    tools:context="com.example.khinthirisoe.nearestclinicsprovider.AboutActivity"
+    tools:showIn="@layout/activity_about">
+
+    <ImageView
+        android:id="@+id/developer_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/developer_name"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/developer_name"
+        android:src="@drawable/thiri" />
+
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/developer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:gravity="center_horizontal"
+        android:text="@string/developer_name"
+        android:textSize="@dimen/developer_name" />
+
+    <TextView
+        android:id="@+id/developer_degree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/developer_name"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:gravity="center_horizontal"
+        android:text="@string/developer_degree"
+        android:textSize="@dimen/developer_degree" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/developer_degree"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:orientation="horizontal">
+
+        <com.gc.materialdesign.views.ButtonFloat
+            android:id="@+id/btnGmail"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/standard_margin"
+            android:layout_marginRight="@dimen/standard_margin"
+            android:layout_weight="1"
+            android:background="@color/normal_green"
+            android:onClick="btnGmail"
+            app:animate="false"
+            app:iconDrawable="@drawable/ic_gmail" />
+
+        <com.gc.materialdesign.views.ButtonFloat
+            android:id="@+id/btnFacebook"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="@dimen/standard_margin"
+            android:layout_weight="1"
+            android:background="@color/normal_green"
+            android:onClick="btnFacebook"
+            app:animate="false"
+            app:iconDrawable="@drawable/ic_facebook" />
+
+        <com.gc.materialdesign.views.ButtonFloat
+            android:id="@+id/btnTwitter"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="@dimen/standard_margin"
+            android:layout_weight="1"
+            android:background="@color/normal_green"
+            android:onClick="btnTwitter"
+            app:animate="false"
+            app:iconDrawable="@drawable/ic_twitter" />
+
+        <com.gc.materialdesign.views.ButtonFloat
+            android:id="@+id/btnPhone"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="@dimen/standard_margin"
+            android:layout_weight="1"
+            android:background="@color/normal_green"
+            android:onClick="btnPhone"
+            app:animate="false"
+            app:iconDrawable="@drawable/ic_phone_white" />
+
+    </LinearLayout>
+</RelativeLayout>
