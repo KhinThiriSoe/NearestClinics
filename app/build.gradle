@@ -28,4 +28,5 @@ dependencies {
         exclude group: 'com.nineoldandroids', module: 'library'
     }
     compile project(':MaterialDesign')
+    compile 'com.github.clans:fab:1.6.3'
 }

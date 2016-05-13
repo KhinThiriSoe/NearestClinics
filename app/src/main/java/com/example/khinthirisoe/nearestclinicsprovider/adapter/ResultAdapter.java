@@ -1,12 +1,12 @@
 package com.example.khinthirisoe.nearestclinicsprovider.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +40,7 @@ public class ResultAdapter extends CursorAdapter {
         TextView clinicName = (TextView) view.findViewById(R.id.text1);
         TextView clinicAddress = (TextView) view.findViewById(R.id.text2);
 //        ImageView phoneImg = (ImageView) view.findViewById(R.id.phone);
+        FloatingActionButton btnPhone = (FloatingActionButton)view.findViewById(R.id.phone);
 
         String clinic_name = cursor.getString(cursor.getColumnIndex(Clinics.COL_NAME));
         String address = cursor.getString(cursor.getColumnIndex(Clinics.COL_ADDRESS));
@@ -66,8 +67,7 @@ public class ResultAdapter extends CursorAdapter {
 //            }
 //        });
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.phone);
-        fab.setOnClickListener(new View.OnClickListener() {
+        btnPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -80,7 +80,7 @@ public class ResultAdapter extends CursorAdapter {
                         context.startActivity(Intent.createChooser(intent, ""));
                     }
                 });
-                AlertDialog alert = builder.create();
+                android.support.v7.app.AlertDialog alert = builder.create();
                 alert.show();
             }
         });

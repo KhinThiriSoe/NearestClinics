@@ -43,9 +43,8 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(clinicName);
         TextView txt_detail_toolbar = (TextView) findViewById(R.id.detail_toolbar_text);
         txt_detail_toolbar.setText(clinicAddress);
-        Log.d("MainActivity", String.valueOf(getSupportActionBar().getTitle()));
+        Log.d("SearchActivity", String.valueOf(getSupportActionBar().getTitle()));
 
-        Uri uri = ClinicDetail.CONTENT_URI;
         String[] projection = new String[]{
                 Doctors.TABLE_NAME + "." + Doctors._ID,
                 Doctors.TABLE_NAME + "." + Doctors.COL_NAME,

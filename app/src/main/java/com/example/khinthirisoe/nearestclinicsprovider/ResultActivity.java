@@ -2,7 +2,6 @@ package com.example.khinthirisoe.nearestclinicsprovider;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -44,7 +43,7 @@ public class ResultActivity extends AppCompatActivity {
         TextView txt_result = (TextView) findViewById(R.id.result_toolbar_text);
         txt_result.setText(north_south_street + " လမ္း x " + west_east_street + " လမ္းနွင့္ အနီးဆံုုးေဆးခန္းမ်ား");
 
-        Uri uri = Clinics.CONTENT_URI;
+
         String[] projection = new String[]{
                 "MAX(" + Clinics.TABLE_NAME + "." + Clinics.COL_NORTH_SOUTH_STREET + ")",
                 "MAX(" + Clinics.TABLE_NAME + "." + Clinics.COL_WEST_EAST_STREET + ")"
@@ -58,10 +57,9 @@ public class ResultActivity extends AppCompatActivity {
             cursor.moveToFirst();
             nsCursor = cursor.getInt(0);
             weCursor = cursor.getInt(1);
-            Log.d("MainActivity", nsCursor + " " + weCursor);
+            Log.d("SearchActivity", nsCursor + " " + weCursor);
         }
 
-        Uri uri1 = Doctors.CONTENT_URI;
         String[] projection1 = new String[]{
                 "DISTINCT(" + Clinics.TABLE_NAME + "." + Clinics._ID + ")",
                 Clinics.TABLE_NAME + "." + Clinics.COL_NAME,
@@ -74,7 +72,7 @@ public class ResultActivity extends AppCompatActivity {
         final Cursor cursor1 = getContentResolver().query(Doctors.CONTENT_URI, projection1, Specialties.TABLE_NAME + "." + Specialties._ID + " =? ", new String[]{specialtyId}, sortOrder);
         if (cursor1 != null) {
             cursor1.moveToFirst();
-            Log.d("MainActivity", String.valueOf(cursor1.getString(0)) + " " + String.valueOf(cursor1.getString(1)) + " " + String.valueOf(cursor1.getString(2)) + " " + String.valueOf(cursor1.getString(3)) + String.valueOf(cursor1.getCount()));
+            Log.d("SearchActivity", String.valueOf(cursor1.getString(0)) + " " + String.valueOf(cursor1.getString(1)) + " " + String.valueOf(cursor1.getString(2)) + " " + String.valueOf(cursor1.getString(3)) + String.valueOf(cursor1.getCount()));
 
         }
 
@@ -92,18 +90,19 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                long clinicId = l;
-                String clinicName = cursor1.getString(cursor1.getColumnIndex(Clinics.COL_NAME));
-                String clinicAddress = cursor1.getString(cursor1.getColumnIndex(Clinics.COL_ADDRESS));
-                String clinicPhones = cursor1.getString(cursor1.getColumnIndex(Clinics.COL_PHONE));
+                if (cursor1 != null) {
+                    String clinicName = cursor1.getString(cursor1.getColumnIndex(Clinics.COL_NAME));
+                    String clinicAddress = cursor1.getString(cursor1.getColumnIndex(Clinics.COL_ADDRESS));
+                    String clinicPhones = cursor1.getString(cursor1.getColumnIndex(Clinics.COL_PHONE));
 
-                Intent intent = new Intent(ResultActivity.this,DetailActivity.class);
-                intent.putExtra(Clinics._ID,clinicId);
-                intent.putExtra(Clinics.COL_NAME,clinicName);
-                intent.putExtra(Clinics.COL_ADDRESS,clinicAddress);
-                intent.putExtra(Clinics.COL_PHONE,clinicPhones);
-                intent.putExtra(Doctors.COL_SPECIALIST,specialtyId);
-                startActivity(intent);
+                    Intent intent = new Intent(ResultActivity.this,DetailActivity.class);
+                    intent.putExtra(Clinics._ID, l);
+                    intent.putExtra(Clinics.COL_NAME,clinicName);
+                    intent.putExtra(Clinics.COL_ADDRESS,clinicAddress);
+                    intent.putExtra(Clinics.COL_PHONE,clinicPhones);
+                    intent.putExtra(Doctors.COL_SPECIALIST,specialtyId);
+                    startActivity(intent);
+                }
             }
         });
     }

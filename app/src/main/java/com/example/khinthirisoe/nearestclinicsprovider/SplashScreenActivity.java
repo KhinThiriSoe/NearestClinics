@@ -20,11 +20,13 @@ import java.io.InputStream;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
+    private static final String TAG = SplashScreenActivity.class.getSimpleName();
+
     int progressStatus = 0;
     ProgressBarDeterminate progressBarDeterminate;
     Handler handler = new Handler();
-    private static String DB_PATH = "/data/data/com.example.khinthirisoe.nearestclinicsprovider/databases/";
-    private static String DB_NAME = "ClinicRecommender.db";
+//    private static String DB_PATH = "/data/data/com.example.khinthirisoe.nearestclinicsprovider/databases/";
+//    private static String DB_NAME = "ClinicRecommender.db";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +39,19 @@ public class SplashScreenActivity extends AppCompatActivity {
         String pref = "FIRST_OPEN" + versionCode;
         Boolean firstOpen = preferences.getBoolean(pref, true);
 
-        //            http://stackoverflow.com/questions/11820142/how-to-pass-a-file-path-which-is-in-assets-folder-to-filestring-path
         if (firstOpen) {
             DbHelper mDbHelper = new DbHelper(this);
             mDbHelper.getReadableDatabase();
-
             extractDatabase();
 
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean(pref, false);
             editor.apply();
+
             startSearchActivity();
-            finish();
 
         } else {
             startSearchActivity();
-            finish();
         }
     }
 
@@ -74,8 +73,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                     }
                 }
                 if (progressStatus == 100) {
-                    Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
+                    Intent i = new Intent(SplashScreenActivity.this, SearchActivity.class);
                     startActivity(i);
+                    finish();
                 }
             }
         }).start();
@@ -96,44 +96,16 @@ public class SplashScreenActivity extends AppCompatActivity {
                 FileOutputStream fos = new FileOutputStream(f);
                 fos.write(buffer);
                 fos.close();
-                Log.d("MainActivity", "database extracted");
+                Log.d("SearchActivity", "database extracted");
 
             } else {
-                Log.d("MainActivity", "can't extract");
+                Log.d("SearchActivity", "can't extract");
             }
 
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-//        http://stackoverflow.com/questions/2605555/android-accessing-assets-folder-sqlite-database-file-with-sqlite-extension
-
-//        try {
-//
-//            String destPath = DB_PATH + DB_NAME ;
-//
-//            File f = new File(destPath);
-//            if(!f.exists()){
-//                Log.d("MainActivity","File Not Exist");
-//                InputStream in = getAssets().open(DB_NAME);
-//                OutputStream out = new FileOutputStream(destPath);
-//
-//                byte[] buffer = new byte[1024];
-//                int length;
-//                while ((length = in.read(buffer)) > 0) {
-//                    out.write(buffer, 0, length);
-//                }
-//                in.close();
-//                out.close();
-//            }
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            Log.d("MainActivity","ioexeption");
-//            e.printStackTrace();
-//        }
     }
 
     @Override

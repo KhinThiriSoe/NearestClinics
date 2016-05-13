@@ -69,7 +69,7 @@ public class DbProvider extends ContentProvider {
                         " JOIN " + Doctors.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_DOCTOR_ID + " = " + Doctors.TABLE_NAME + "." + Doctors._ID;
                 queryBuilder.setTables(maxStreetQuery);
                 queryBuilder.appendWhere(Doctors.TABLE_NAME + "." + Doctors.COL_SPECIALIST + " = " + selection);
-                Log.d("MainActivity", queryBuilder.getTables());
+                Log.d("SearchActivity", queryBuilder.getTables());
                 break;
             }
 
@@ -77,7 +77,7 @@ public class DbProvider extends ContentProvider {
                 String resultQuery = ClinicDetail.TABLE_NAME + " JOIN " + Clinics.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_CLINIC_ID + " = " + Clinics.TABLE_NAME + "." + Clinics._ID +
                         " JOIN " + Doctors.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_DOCTOR_ID + " = " + Doctors.TABLE_NAME + "." + Doctors._ID + " JOIN " + Specialties.TABLE_NAME + " ON " + Doctors.TABLE_NAME + "." + Doctors.COL_SPECIALIST + " = " + Specialties.TABLE_NAME + "." + Specialties._ID;
                 queryBuilder.setTables(resultQuery);
-                Log.d("MainActivity", queryBuilder.getTables());
+                Log.d("SearchActivity", queryBuilder.getTables());
                 break;
             }
 
@@ -85,7 +85,7 @@ public class DbProvider extends ContentProvider {
                 String detailQuery = ClinicDetail.TABLE_NAME + " JOIN " + Clinics.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_CLINIC_ID + " = " + Clinics.TABLE_NAME + "." + Clinics._ID +
                         " JOIN " + Doctors.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_DOCTOR_ID + " = " + Doctors.TABLE_NAME + "." + Doctors._ID + " JOIN " + Specialties.TABLE_NAME + " ON " + Doctors.TABLE_NAME + "." + Doctors.COL_SPECIALIST + " = " + Specialties.TABLE_NAME + "." + Specialties._ID;
                 queryBuilder.setTables(detailQuery);
-                Log.d("MainActivity", queryBuilder.getTables());
+                Log.d("SearchActivity", queryBuilder.getTables());
                 break;
             }
 

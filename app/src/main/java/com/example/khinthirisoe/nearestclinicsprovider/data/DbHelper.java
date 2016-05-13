@@ -45,7 +45,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 stringBuilder.append(columns[n][0]).append(' ').append(columns[n][1]);
             }
             String s = stringBuilder.append(");").toString();
-//            Log.d("MainActivity",s);
+//            Log.d("SearchActivity",s);
             return s;
         }
     }
