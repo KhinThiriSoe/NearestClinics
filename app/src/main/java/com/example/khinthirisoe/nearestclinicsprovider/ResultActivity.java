@@ -17,6 +17,8 @@ import com.example.khinthirisoe.nearestclinicsprovider.data.DbContract.Clinics;
 import com.example.khinthirisoe.nearestclinicsprovider.data.DbContract.Doctors;
 import com.example.khinthirisoe.nearestclinicsprovider.data.DbContract.Specialties;
 
+import java.util.Arrays;
+
 public class ResultActivity extends AppCompatActivity {
 
     private static final String TAG = ResultActivity.class.getSimpleName();
@@ -44,11 +46,17 @@ public class ResultActivity extends AppCompatActivity {
         txt_result.setText(north_south_street + " လမ္း x " + west_east_street + " လမ္းနွင့္ အနီးဆံုုးေဆးခန္းမ်ား");
 
 
-        String[] projection = new String[]{
+//      SELECT MAX(clinics.north_south_street), MAX(clinics.west_east_street);
+        String[] maxProjection = new String[]{
                 "MAX(" + Clinics.TABLE_NAME + "." + Clinics.COL_NORTH_SOUTH_STREET + ")",
                 "MAX(" + Clinics.TABLE_NAME + "." + Clinics.COL_WEST_EAST_STREET + ")"
         };
-        final Cursor cursor = getContentResolver().query(Clinics.CONTENT_URI, projection, specialtyId, null, null);
+//        WHERE doctors.specialist = 1;
+        String maxSelection = Doctors.TABLE_NAME + "." + Doctors.COL_SPECIALIST + " = " + specialtyId;
+
+        Log.d("SearchActivity", "maxProjection : " + Arrays.toString(maxProjection));
+        Log.d("SearchActivity", "maxSelection : " + maxSelection);
+        final Cursor cursor = getContentResolver().query(Clinics.CONTENT_URI, maxProjection, maxSelection, null, null);
 
         int nsCursor = 0;
         int weCursor = 0;
@@ -57,10 +65,12 @@ public class ResultActivity extends AppCompatActivity {
             cursor.moveToFirst();
             nsCursor = cursor.getInt(0);
             weCursor = cursor.getInt(1);
-            Log.d("SearchActivity", nsCursor + " " + weCursor);
+            Log.d("SearchActivity", "max_north_south_street : " + nsCursor + " max_west_east_street : " + weCursor);
         }
 
-        String[] projection1 = new String[]{
+//        SELECT DISTINCT(clinics._id), clinics.clinic_name, clinics.address, clinics.phone,
+//                  ((83 - ABS(54 - clinics.north_south_street)) +(77 - ABS(1 - clinics.west_east_street))) AS myvalue;
+        String[] resultProjection = new String[]{
                 "DISTINCT(" + Clinics.TABLE_NAME + "." + Clinics._ID + ")",
                 Clinics.TABLE_NAME + "." + Clinics.COL_NAME,
                 Clinics.TABLE_NAME + "." + Clinics.COL_ADDRESS,
@@ -68,39 +78,45 @@ public class ResultActivity extends AppCompatActivity {
                 "((" + nsCursor + " - ABS(" + north_south_street + " - " + Clinics.TABLE_NAME + "." + Clinics.COL_NORTH_SOUTH_STREET + ")) +(" + weCursor + " - ABS(" + west_east_street + " - " + Clinics.TABLE_NAME + "." + Clinics.COL_WEST_EAST_STREET + ")))" +
                         " AS myvalue"
         };
+
+//        WHERE doctors.specialist = 1;
+//        String resultSelection = Doctors.TABLE_NAME + "." + Doctors.COL_SPECIALIST + " = " + specialtyId;
         String sortOrder = " myvalue DESC";
-        final Cursor cursor1 = getContentResolver().query(Doctors.CONTENT_URI, projection1, Specialties.TABLE_NAME + "." + Specialties._ID + " =? ", new String[]{specialtyId}, sortOrder);
-        if (cursor1 != null) {
-            cursor1.moveToFirst();
-            Log.d("SearchActivity", String.valueOf(cursor1.getString(0)) + " " + String.valueOf(cursor1.getString(1)) + " " + String.valueOf(cursor1.getString(2)) + " " + String.valueOf(cursor1.getString(3)) + String.valueOf(cursor1.getCount()));
+
+        Log.d("SearchActivity", "resultProjection : " + Arrays.toString(resultProjection));
+        Log.d("SearchActivity", "resultSelection : " + maxSelection);
+
+        final Cursor c = getContentResolver().query(Doctors.CONTENT_URI, resultProjection, maxSelection, null, sortOrder);
+        if (c != null) {
+            c.moveToFirst();
 
         }
 
 //        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
 //                ResultActivity.this,
 //                android.R.layout.simple_list_item_2,
-//                cursor1,
+//                c,
 //                new String[]{Clinics.COL_NAME,Clinics.COL_ADDRESS},
 //                new int[]{android.R.id.text1, android.R.id.text2});
 
-        final ResultAdapter adapter = new ResultAdapter(ResultActivity.this,cursor1,false);
+        final ResultAdapter adapter = new ResultAdapter(ResultActivity.this, c, false);
         resultListView.setAdapter(adapter);
 
         resultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if (cursor1 != null) {
-                    String clinicName = cursor1.getString(cursor1.getColumnIndex(Clinics.COL_NAME));
-                    String clinicAddress = cursor1.getString(cursor1.getColumnIndex(Clinics.COL_ADDRESS));
-                    String clinicPhones = cursor1.getString(cursor1.getColumnIndex(Clinics.COL_PHONE));
+                if (c != null) {
+                    String clinicName = c.getString(c.getColumnIndex(Clinics.COL_NAME));
+                    String clinicAddress = c.getString(c.getColumnIndex(Clinics.COL_ADDRESS));
+                    String clinicPhones = c.getString(c.getColumnIndex(Clinics.COL_PHONE));
 
-                    Intent intent = new Intent(ResultActivity.this,DetailActivity.class);
+                    Intent intent = new Intent(ResultActivity.this, DetailActivity.class);
                     intent.putExtra(Clinics._ID, l);
-                    intent.putExtra(Clinics.COL_NAME,clinicName);
-                    intent.putExtra(Clinics.COL_ADDRESS,clinicAddress);
-                    intent.putExtra(Clinics.COL_PHONE,clinicPhones);
-                    intent.putExtra(Doctors.COL_SPECIALIST,specialtyId);
+                    intent.putExtra(Clinics.COL_NAME, clinicName);
+                    intent.putExtra(Clinics.COL_ADDRESS, clinicAddress);
+                    intent.putExtra(Clinics.COL_PHONE, clinicPhones);
+                    intent.putExtra(Doctors.COL_SPECIALIST, specialtyId);
                     startActivity(intent);
                 }
             }

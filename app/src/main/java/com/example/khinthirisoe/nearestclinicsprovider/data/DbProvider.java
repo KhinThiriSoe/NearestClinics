@@ -21,8 +21,8 @@ import com.example.khinthirisoe.nearestclinicsprovider.data.DbContract.Specialti
 public class DbProvider extends ContentProvider {
 
     public static final int URI_SPECIALTIES = 1;
-    public static final int URI_RESULT_FIRST = 2;
-    public static final int URI_RESULT_SECOND = 3;
+    public static final int URI_MAX_STREET = 2;
+    public static final int URI_RESULT = 3;
     public static final int URI_DETAILS = 4;
 
     public static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
@@ -31,9 +31,9 @@ public class DbProvider extends ContentProvider {
         URI_MATCHER.addURI(DbContract.CONTENT_AUTHORITY,
                 Specialties.TABLE_NAME, URI_SPECIALTIES);
         URI_MATCHER.addURI(DbContract.CONTENT_AUTHORITY,
-                Clinics.TABLE_NAME, URI_RESULT_FIRST);
+                Clinics.TABLE_NAME, URI_MAX_STREET);
         URI_MATCHER.addURI(DbContract.CONTENT_AUTHORITY,
-                Doctors.TABLE_NAME, URI_RESULT_SECOND);
+                Doctors.TABLE_NAME, URI_RESULT);
         URI_MATCHER.addURI(DbContract.CONTENT_AUTHORITY,
                 ClinicDetail.TABLE_NAME, URI_DETAILS);
     }
@@ -57,35 +57,31 @@ public class DbProvider extends ContentProvider {
 
         int matchCode = URI_MATCHER.match(uri);
 
+        String joinTable = ClinicDetail.TABLE_NAME + " JOIN " + Clinics.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_CLINIC_ID + " = " + Clinics.TABLE_NAME + "." + Clinics._ID +
+                " JOIN " + Doctors.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_DOCTOR_ID + " = " + Doctors.TABLE_NAME + "." + Doctors._ID;
+//        FROM clinicdetail JOIN clinics ON clinicdetail.clinics_id = clinics._id JOIN doctors ON clinicdetail.doctor_id = doctors._id;
+
         switch (matchCode) {
             case URI_SPECIALTIES: {
                 queryBuilder.setTables(Specialties.TABLE_NAME);
+                Log.d("SearchActivity", "Specialty Table : " + queryBuilder.getTables());
                 break;
             }
 
 
-            case URI_RESULT_FIRST: {
-                String maxStreetQuery = ClinicDetail.TABLE_NAME + " JOIN " + Clinics.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_CLINIC_ID + " = " + Clinics.TABLE_NAME + "." + Clinics._ID +
-                        " JOIN " + Doctors.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_DOCTOR_ID + " = " + Doctors.TABLE_NAME + "." + Doctors._ID;
-                queryBuilder.setTables(maxStreetQuery);
-                queryBuilder.appendWhere(Doctors.TABLE_NAME + "." + Doctors.COL_SPECIALIST + " = " + selection);
-                Log.d("SearchActivity", queryBuilder.getTables());
+            case URI_MAX_STREET: {
+                queryBuilder.setTables(joinTable);
+                Log.d("SearchActivity ", "FROM " + queryBuilder.getTables());
                 break;
             }
 
-            case URI_RESULT_SECOND: {
-                String resultQuery = ClinicDetail.TABLE_NAME + " JOIN " + Clinics.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_CLINIC_ID + " = " + Clinics.TABLE_NAME + "." + Clinics._ID +
-                        " JOIN " + Doctors.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_DOCTOR_ID + " = " + Doctors.TABLE_NAME + "." + Doctors._ID + " JOIN " + Specialties.TABLE_NAME + " ON " + Doctors.TABLE_NAME + "." + Doctors.COL_SPECIALIST + " = " + Specialties.TABLE_NAME + "." + Specialties._ID;
-                queryBuilder.setTables(resultQuery);
-                Log.d("SearchActivity", queryBuilder.getTables());
+            case URI_RESULT: {
+                queryBuilder.setTables(joinTable);
                 break;
             }
 
             case URI_DETAILS: {
-                String detailQuery = ClinicDetail.TABLE_NAME + " JOIN " + Clinics.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_CLINIC_ID + " = " + Clinics.TABLE_NAME + "." + Clinics._ID +
-                        " JOIN " + Doctors.TABLE_NAME + " ON " + ClinicDetail.TABLE_NAME + "." + ClinicDetail.COL_DOCTOR_ID + " = " + Doctors.TABLE_NAME + "." + Doctors._ID + " JOIN " + Specialties.TABLE_NAME + " ON " + Doctors.TABLE_NAME + "." + Doctors.COL_SPECIALIST + " = " + Specialties.TABLE_NAME + "." + Specialties._ID;
-                queryBuilder.setTables(detailQuery);
-                Log.d("SearchActivity", queryBuilder.getTables());
+                queryBuilder.setTables(joinTable);
                 break;
             }
 
@@ -106,9 +102,9 @@ public class DbProvider extends ContentProvider {
         switch (matchCode) {
             case URI_SPECIALTIES:
                 return Specialties.CONTENT_TYPE;
-            case URI_RESULT_FIRST:
+            case URI_MAX_STREET:
                 return Clinics.CONTENT_TYPE;
-            case URI_RESULT_SECOND:
+            case URI_RESULT:
                 return Doctors.CONTENT_TYPE;
             case URI_DETAILS:
                 return ClinicDetail.CONTENT_TYPE;
