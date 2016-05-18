@@ -65,7 +65,7 @@ public class ResultActivity extends AppCompatActivity {
             cursor.moveToFirst();
             nsCursor = cursor.getInt(0);
             weCursor = cursor.getInt(1);
-            Log.d("SearchActivity", "max_north_south_street : " + nsCursor + " max_west_east_street : " + weCursor);
+            Log.d("SearchActivity", "max_north_south_street : " + nsCursor + ", max_west_east_street : " + weCursor);
         }
 
 //        SELECT DISTINCT(clinics._id), clinics.clinic_name, clinics.address, clinics.phone,
