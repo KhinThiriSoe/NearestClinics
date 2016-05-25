@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,8 +15,6 @@ import com.example.khinthirisoe.nearestclinicsprovider.adapter.ResultAdapter;
 import com.example.khinthirisoe.nearestclinicsprovider.data.DbContract.Clinics;
 import com.example.khinthirisoe.nearestclinicsprovider.data.DbContract.Doctors;
 import com.example.khinthirisoe.nearestclinicsprovider.data.DbContract.Specialties;
-
-import java.util.Arrays;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -54,8 +51,6 @@ public class ResultActivity extends AppCompatActivity {
 //        WHERE doctors.specialist = 1;
         String maxSelection = Doctors.TABLE_NAME + "." + Doctors.COL_SPECIALIST + " = " + specialtyId;
 
-        Log.d("SearchActivity", "maxProjection : " + Arrays.toString(maxProjection));
-        Log.d("SearchActivity", "maxSelection : " + maxSelection);
         final Cursor cursor = getContentResolver().query(Clinics.CONTENT_URI, maxProjection, maxSelection, null, null);
 
         int nsCursor = 0;
@@ -65,7 +60,6 @@ public class ResultActivity extends AppCompatActivity {
             cursor.moveToFirst();
             nsCursor = cursor.getInt(0);
             weCursor = cursor.getInt(1);
-            Log.d("SearchActivity", "max_north_south_street : " + nsCursor + ", max_west_east_street : " + weCursor);
         }
 
 //        SELECT DISTINCT(clinics._id), clinics.clinic_name, clinics.address, clinics.phone,
@@ -79,25 +73,14 @@ public class ResultActivity extends AppCompatActivity {
                         " AS myvalue"
         };
 
-//        WHERE doctors.specialist = 1;
 //        String resultSelection = Doctors.TABLE_NAME + "." + Doctors.COL_SPECIALIST + " = " + specialtyId;
         String sortOrder = " myvalue DESC";
-
-        Log.d("SearchActivity", "resultProjection : " + Arrays.toString(resultProjection));
-        Log.d("SearchActivity", "resultSelection : " + maxSelection);
 
         final Cursor c = getContentResolver().query(Doctors.CONTENT_URI, resultProjection, maxSelection, null, sortOrder);
         if (c != null) {
             c.moveToFirst();
 
         }
-
-//        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-//                ResultActivity.this,
-//                android.R.layout.simple_list_item_2,
-//                c,
-//                new String[]{Clinics.COL_NAME,Clinics.COL_ADDRESS},
-//                new int[]{android.R.id.text1, android.R.id.text2});
 
         final ResultAdapter adapter = new ResultAdapter(ResultActivity.this, c, false);
         resultListView.setAdapter(adapter);
@@ -129,13 +112,8 @@ public class ResultActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
         }

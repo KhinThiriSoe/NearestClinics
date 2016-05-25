@@ -27,7 +27,6 @@ public class ResultAdapter extends CursorAdapter {
         super(context, c, autoRequery);
         inflater = LayoutInflater.from(context);
     }
-//    http://stackoverflow.com/questions/5300787/how-do-i-create-a-custom-cursor-adapter-for-a-listview-for-use-with-images-and-t
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -39,7 +38,6 @@ public class ResultAdapter extends CursorAdapter {
 
         TextView clinicName = (TextView) view.findViewById(R.id.text1);
         TextView clinicAddress = (TextView) view.findViewById(R.id.text2);
-//        ImageView phoneImg = (ImageView) view.findViewById(R.id.phone);
         FloatingActionButton btnPhone = (FloatingActionButton)view.findViewById(R.id.phone);
 
         String clinic_name = cursor.getString(cursor.getColumnIndex(Clinics.COL_NAME));
@@ -48,24 +46,6 @@ public class ResultAdapter extends CursorAdapter {
 
         clinicName.setText(clinic_name);
         clinicAddress.setText(address);
-
-//        phoneImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                final String[] phones = phone.split(", ");
-//                builder.setTitle("မိမိေခၚလိုုေသာ ဖုုန္းနံပါတ္ကိုု ေရြးခ်ယ္ပါ");
-//                builder.setItems(phones, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phones[which]));
-//                        context.startActivity(Intent.createChooser(intent, ""));
-//                    }
-//                });
-//                AlertDialog alert = builder.create();
-//                alert.show();
-//            }
-//        });
 
         btnPhone.setOnClickListener(new View.OnClickListener() {
             @Override

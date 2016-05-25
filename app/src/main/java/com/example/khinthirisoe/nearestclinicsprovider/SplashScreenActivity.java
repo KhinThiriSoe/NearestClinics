@@ -7,8 +7,6 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.example.khinthirisoe.nearestclinicsprovider.data.DbHelper;
 import com.gc.materialdesign.views.ProgressBarDeterminate;
@@ -53,10 +51,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         } else {
             startSearchActivity();
         }
+
     }
 
+
     private void startSearchActivity() {
-        //        http://stackoverflow.com/questions/23932828/splash-screen-with-horizontal-progress-bar
         new Thread(new Runnable() {
             public void run() {
                 while (progressStatus < 100) {
@@ -82,7 +81,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     }
 
-    //    http://stackoverflow.com/questions/8474821/how-to-get-the-android-path-string-to-a-file-on-assets-folder
     private void extractDatabase() {
         File f = getDatabasePath("ClinicRecommender");
         try {
@@ -108,22 +106,4 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_splash_screen, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        return super.onOptionsItemSelected(item);
-    }
 }

@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/welcome"
         android:gravity="center_horizontal"
-        android:text="@string/welcome_des"
+        android:text="Nearest Clinics Application မွ ၾကိဳဆိုုပါတယ္"
         android:textColor="@android:color/white"
         android:textSize="@dimen/welcome_des" />
 

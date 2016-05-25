@@ -31,7 +31,6 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ResultActivity"
-            android:label="@string/title_activity_result"
             android:parentActivityName=".SearchActivity"
             android:theme="@style/NoActionBar" >
             <meta-data
@@ -46,13 +45,11 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".AboutActivity"
-            android:label="@string/title_activity_about"
             android:theme="@style/NoActionBar" >
         </activity>
         <activity
             android:screenOrientation="portrait"
             android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"
             android:parentActivityName=".ResultActivity"
             android:theme="@style/NoActionBar" >
             <meta-data

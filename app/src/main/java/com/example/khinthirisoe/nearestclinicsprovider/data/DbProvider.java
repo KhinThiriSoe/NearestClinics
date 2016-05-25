@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.khinthirisoe.nearestclinicsprovider.data.DbContract.ClinicDetail;
 import com.example.khinthirisoe.nearestclinicsprovider.data.DbContract.Clinics;
@@ -64,14 +63,12 @@ public class DbProvider extends ContentProvider {
         switch (matchCode) {
             case URI_SPECIALTIES: {
                 queryBuilder.setTables(Specialties.TABLE_NAME);
-                Log.d("SearchActivity", "Specialty Table : " + queryBuilder.getTables());
                 break;
             }
 
 
             case URI_MAX_STREET: {
                 queryBuilder.setTables(joinTable);
-                Log.d("SearchActivity ", "FROM " + queryBuilder.getTables());
                 break;
             }
 

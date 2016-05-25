@@ -6,6 +6,5 @@ package com.example.khinthirisoe.nearestclinicsprovider.data;
 public class DbConstant {
 
     public static final String SEPARATOR = "/";
-    public static final String SPACE = " ";
     public static final String CURLY_BRACE = "(%s)";
 }

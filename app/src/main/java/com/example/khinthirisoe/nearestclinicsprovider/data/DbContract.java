@@ -25,6 +25,7 @@ public class DbContract {
     static final String REAL = "REAL";
     static final String TYPE_REAL_NOT_NULL = REAL + NOT_NULL;
 
+
     public static class Clinics implements BaseColumns {
 
         public static final String TABLE_NAME = "clinics";
@@ -51,6 +52,7 @@ public class DbContract {
         public static final String ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + DbConstant.SEPARATOR + TABLE_NAME;
     }
 
+
     public static class Doctors implements BaseColumns {
 
         public static final String TABLE_NAME = "doctors";
@@ -71,6 +73,7 @@ public class DbContract {
         public static final String ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + DbConstant.SEPARATOR + TABLE_NAME;
     }
 
+
     public static class Specialties implements BaseColumns {
 
         public static final String TABLE_NAME = "specialties";
@@ -87,6 +90,7 @@ public class DbContract {
         public static final String ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + DbConstant.SEPARATOR + TABLE_NAME;
     }
 
+
     public static class ClinicDetail implements BaseColumns {
 
         public static final String TABLE_NAME = "clinic_detail";
@@ -97,14 +101,12 @@ public class DbContract {
         public static final String FOREIGN_KEY = "FOREIGN KEY";
         public static final String REFERENCES = " REFERENCES ";
 
-        public static final String ON_DELETE_CASCADE = " ON DELETE CASCADE";
-
         public static final String[][] COLUMNS = new String[][]{
                 {_ID, TYPE_PRIMARY_KEY_AUTOINCREMENT},
                 {COL_CLINIC_ID, TYPE_INTEGER},
                 {COL_DOCTOR_ID, TYPE_INTEGER},
-                {FOREIGN_KEY, String.format(DbConstant.CURLY_BRACE, COL_CLINIC_ID) + REFERENCES + Clinics.TABLE_NAME + String.format(DbConstant.CURLY_BRACE,Clinics._ID)},
-                {FOREIGN_KEY, String.format(DbConstant.CURLY_BRACE, COL_DOCTOR_ID) + REFERENCES + Doctors.TABLE_NAME + String.format(DbConstant.CURLY_BRACE,Doctors._ID)}
+                {FOREIGN_KEY, String.format(DbConstant.CURLY_BRACE, COL_CLINIC_ID) + REFERENCES + Clinics.TABLE_NAME + String.format(DbConstant.CURLY_BRACE, Clinics._ID)},
+                {FOREIGN_KEY, String.format(DbConstant.CURLY_BRACE, COL_DOCTOR_ID) + REFERENCES + Doctors.TABLE_NAME + String.format(DbConstant.CURLY_BRACE, Doctors._ID)}
         };
 
         public static final Uri CONTENT_URI = Uri.parse(BASE_CONTENT_URI + DbConstant.SEPARATOR + TABLE_NAME);

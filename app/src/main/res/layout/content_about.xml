@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/standard_margin"
     android:background="@android:color/white"
+    android:padding="@dimen/standard_margin"
     tools:context="com.example.khinthirisoe.nearestclinicsprovider.AboutActivity"
     tools:showIn="@layout/activity_about">
 
@@ -19,7 +19,6 @@
         android:src="@drawable/thiri" />
 
     <TextView
-        android:textStyle="bold"
         android:id="@+id/developer_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +26,8 @@
         android:layout_marginTop="@dimen/standard_margin"
         android:gravity="center_horizontal"
         android:text="@string/developer_name"
-        android:textSize="@dimen/developer_name" />
+        android:textSize="@dimen/developer_name"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/developer_degree"
