@@ -6,9 +6,9 @@
 - can make direct phone call to prefer clinic
 
 What I've learned after thesis:
-- how FindMe Retrieval algorithm works
-- why Knowlegde-based Recommender Systems are useful
-- how to apply the algrothim in android app
-- how content provider works with sqlite database
-- how to measure performance of the app
+- How FindMe Recommender System works
+- Why Knowlegde-based Recommender Systems are useful
+- How to apply the algorithms from FindMe recommer system to find clinics from nearest locations
+- How content provider works with sqlite database
+- How to measure performance of the app
 
