@@ -1,4 +1,6 @@
-# This app is for M.C.Sc (Thesis) project of [University of Computer Studies, Mandalay, Myanmar](ucsm.edu.mm).
+# NearestClinics
+
+### This app is for M.C.Sc (Thesis) project of [University of Computer Studies, Mandalay, Myanmar](ucsm.edu.mm).
 
 ### The app contains the following features:
 - Filter clinics/hospitals by desired treatment.
